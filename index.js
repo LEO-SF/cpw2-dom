@@ -1,8 +1,10 @@
 /**
  * Aplica a cor #BECCC3 no background do body da página
  */
-function background(){
+function background() {
 
+    document.getElementById('body').style.backgroundColor = "#BECCC3";
+    console.log("pato");
     /**
      * Tarefa/Issue  1
      *
@@ -17,23 +19,56 @@ function background(){
  * e apresente o nome e o sobrenome de uma pessoa (separado por um espaço)
  * na div id='result'
  */
-function show(){
+function show() {
 
-     /**
-      * Issue  2
-      *
-      * Recupera os valores dos campos de texto cujo o id='fname' e id='lname' e apresente o nome
-      * e o sobrenome de uma pessoa (separado por um espaço) na div id='result'
-      */
+    var fname = document.getElementById('fname').value;
+    var lname = document.getElementById('lname').value;
+    var result = fname + " " + lname;
+    document.getElementById('result').innerHTML = result;
+    console.log(result);
+
+    /**
+     * Issue  2
+     *
+     * Recupera os valores dos campos de texto cujo o id='fname' e id='lname' e apresente o nome
+     * e o sobrenome de uma pessoa (separado por um espaço) na div id='result'
+     */
 }
 
 /**
  * Filtra o array de objetos (data) de acordo com os caracteres
  * digitados no campo de texto id='name'
  */
-function search(){
+function search() {
 
-    var data = [{name: "Rodrigo"}, {name: "Ricardo"}, {name: "Fabio"}, {name: "Alex"}, {name: "Sílvia"}];
+    var data = [{ name: "Rodrigo" }, { name: "Ricardo" }, { name: "Fabio" }, { name: "Alex" }, { name: "Sílvia" }]
+
+    var nameInput = document.getElementById('name');
+    var searchDiv = document.getElementById('search');
+
+    nameInput.addEventListener('input', function () {
+        var searchText = nameInput.value.toLowerCase();
+        var filteredData = data.filter(function (person) {
+            return person.name.toLowerCase().startsWith(searchText);
+        });
+
+        displayResults(filteredData);
+    });
+
+    function displayResults(results) {
+        searchDiv.innerHTML = '';
+
+        if (results.length === 0) {
+            searchDiv.textContent = 'Nenhum resultado encontrado.';
+        } else {
+            results.forEach(function (person) {
+                var personDiv = document.createElement('div');
+                personDiv.textContent = person.name;
+                searchDiv.appendChild(personDiv);
+            });
+        }
+    }
+
 
     /**
      * Issue 3
@@ -59,7 +94,7 @@ function search(){
  *
  * @param {*} node Um objeto HTML Node
  */
-function removeAllChildren(node){
+function removeAllChildren(node) {
     while (node.hasChildNodes()) {
         node.removeChild(node.firstChild);
     }
