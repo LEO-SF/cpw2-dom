@@ -3,8 +3,7 @@
  */
 function background() {
 
-    document.getElementById('body').style.backgroundColor = "#BECCC3";
-    console.log("pato");
+    document.body.style.backgroundColor = "#BECCC3";
     /**
      * Tarefa/Issue  1
      *
